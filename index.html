@@ -282,6 +282,9 @@
 
   </main>
 
+  <style> /* Minimal styling so it looks like a chat box */ #chatbot { position: fixed; bottom: 20px; right: 20px; width: 300px; height: 400px; border: 1px solid #ccc; background: white; padding: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.3); display: flex; flex-direction: column; font-family: Arial, sans-serif; } #chat-log { flex: 1; overflow-y: auto; margin-bottom: 10px; font-size: 14px; } #chat-input { width: 80%; padding: 5px; } #send-btn { width: 18%; padding: 5px; margin-left: 2%; } </style>
+<!-- Chatbot widget --> <div id="chatbot"> <div id="chat-log"></div> <div> <input id="chat-input" type="text" placeholder="Type here..."> <button id="send-btn" onclick="sendMessage()">Send</button> </div> </div> <script> // Responses dictionary const responses = { "hello": ["Hello!", "Hi there!", "Hey 👋"], "hi": ["Hello!", "Hi there!", "Hey 👋"], "hey": ["Hello!", "Hi there!", "Hey 👋"], "how are you": ["I'm doing great, thanks for asking!"], "bye": ["Goodbye! Talk to you later."], "triplehands": ["Triple Hands Agro Food Enterprises is a company based in Abuja, Nigeria. They deal with food flours such as pounded yam flour, plantain flour, corn flour, beans flour, and cassava flour."], "all products": ["Their products include pounded yam flour, plantain flour, cassava flour, corn flour, and beans flour."], "price": ["Their prices vary depending on the product and quantity ordered. Tell me the product and I will tell you the price."], "corn flour": ["It costs ₦3,500 per 1kg."], "pounded yam flour": ["It costs ₦6,000 per 1kg."], "beans flour": ["It costs ₦4,500 per 1kg."], "plantain flour": ["It costs ₦4,500 per 1kg."], "cassava flour": ["It costs ₦4,500 per 1kg."], "how to order": ["You can order by visiting Bengate Plaza, Wuse II, Abuja or email triplehands@yahoo.co.uk."], "business hours": ["Mon–Sat: 8:00am–6:00pm. Closed on Sundays."], "product size": ["The product sizes are currently available in 1kg."], }; // Helper function to pick random reply function randomChoice(arr) { return arr[Math.floor(Math.random() * arr.length)]; } // Chatbot response function function chatbotResponse(userInput) { const input = userInput.toLowerCase().trim(); // Exact match if (responses[input]) { return randomChoice(responses[input]); } // Keyword match for (let key in responses) { if (input.includes(key)) { return randomChoice(responses[key]); } } // Fallback return "Hmm, I don't understand that yet. You can ask us at triplehands@yahoo.co.uk"; } // Send message function function sendMessage() { const inputField = document.getElementById("chat-input"); const input = inputField.value; const log = document.getElementById("chat-log"); if (input.trim() === "") return; log.innerHTML += "<p><b>You:</b> " + input + "</p>"; const reply = chatbotResponse(input); log.innerHTML += "<p><b>Bot:</b> " + reply + "</p>"; inputField.value = ""; log.scrollTop = log.scrollHeight; // auto-scroll } </script>
+  
   <!-- Footer -->
   <footer id="contact">
     <div class="footer-inner">
@@ -340,6 +343,7 @@
   </script>
 </body>
 </html>
+
 
 
 
